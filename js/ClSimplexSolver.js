@@ -17,8 +17,8 @@ ClTableau.subclass('ClSimplexSolver', 'default category', {
       var _fNeedsSolving //boolean
       var _stkCedcns //Stack
  */
-  initialize: function() {
-    this.parent();
+  initialize: function($super) {
+    $super();
     this._stayMinusErrorVars = new Array();
     this._stayPlusErrorVars = new Array();
     this._errorVars = new Hashtable(); // cn -> Set of clv
@@ -392,8 +392,8 @@ ClTableau.subclass('ClSimplexSolver', 'default category', {
     }
     return this;
   },
-  getInternalInfo: function() {
-    var retstr = this.parent();
+  getInternalInfo: function($super) {
+    var retstr = $super();
     retstr += "\nSolver info:\n";
     retstr += "Stay Error Variables: ";
     retstr += this._stayPlusErrorVars.length + this._stayMinusErrorVars.length;
@@ -409,8 +409,8 @@ ClTableau.subclass('ClSimplexSolver', 'default category', {
     bstr += "\n";
     return bstr;
   },
-  toString: function() {
-    var bstr = this.parent();
+  toString: function($super) {
+    var bstr = $super();
     bstr += "\n_stayPlusErrorVars: ";
     bstr += '[' + this._stayPlusErrorVars + ']';
     bstr += "\n_stayMinusErrorVars: ";

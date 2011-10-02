@@ -47,17 +47,17 @@ ClAbstractVariable.iVariableNumber = 1;
 
 ClAbstractVariable.subclass('ClVariable', 'default category', {
   //Extends: ClAbstractVariable,
-  initialize: function(name_or_val, value) {
+  initialize: function($super, name_or_val, value) {
     this._name = "";
     this._value = 0.0;
     if (typeof(name_or_val) == "string") {
-      this.parent(name_or_val);
+      $super(name_or_val);
       this._value = value || 0.0;
     } else if (typeof(name_or_val) == "number") {
-      this.parent();
+      $super();
       this._value = name_or_val;
     } else {
-      this.parent();
+      $super();
     }
     if (ClVariable._ourVarMap) {
       ClVariable._ourVarMap[this._name] = this;
@@ -118,8 +118,8 @@ ClVariable.getVarMap = function(map) {
 
 ClAbstractVariable.subclass('ClDummyVariable', 'default category', {
   //Extends: ClAbstractVariable,
-  initialize: function(name_or_val, prefix) {
-    this.parent(name_or_val, prefix);
+  initialize: function($super, name_or_val, prefix) {
+    $super(name_or_val, prefix);
   },
 
   isDummy: function() {
@@ -146,7 +146,7 @@ ClAbstractVariable.subclass('ClDummyVariable', 'default category', {
 ClAbstractVariable.subclass('ClObjectiveVariable', 'default category', {
   //Extends: ClAbstractVariable,
   initialize: function(name_or_val, prefix) {
-    this.parent(name_or_val, prefix);
+    $super(name_or_val, prefix);
   },
 
   isExternal: function() {
@@ -170,7 +170,7 @@ ClAbstractVariable.subclass('ClObjectiveVariable', 'default category', {
 ClAbstractVariable.subclass('ClSlackVariable', 'default category', {
   //Extends: ClAbstractVariable,
   initialize: function(name_or_val, prefix) {
-    this.parent(name_or_val, prefix);
+    $super(name_or_val, prefix);
   },
 
   isExternal: function() {

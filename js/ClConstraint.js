@@ -94,8 +94,8 @@ ClConstraint.subclass('ClEditOrStayConstraint', 'default category', {
      var _variable
      var _expression
  */
-  initialize: function(clv /*ClVariable*/, strength /*ClStrength*/, weight /*double*/) {
-    this.parent(strength, weight);
+  initialize: function($super, clv /*ClVariable*/, strength /*ClStrength*/, weight /*double*/) {
+    $super(strength, weight);
     this._variable = clv;
     this._expression = new ClLinearExpression(this._variable, -1.0, 
                                               this._variable.value());
@@ -118,8 +118,8 @@ ClConstraint.subclass('ClEditOrStayConstraint', 'default category', {
 ClEditOrStayConstraint.subclass('ClEditConstraint', 'default category', {
   //Extends: ClEditOrStayConstraint,
 
-  initialize: function(clv /*ClVariable*/, strength /*ClStrength*/, weight /*double*/) {
-    this.parent(clv, strength, weight);
+  initialize: function($super, clv /*ClVariable*/, strength /*ClStrength*/, weight /*double*/) {
+    $super(clv, strength, weight);
   },
 
   isEditConstraint: function() {
@@ -127,15 +127,15 @@ ClEditOrStayConstraint.subclass('ClEditConstraint', 'default category', {
   },
   
   toString: function() {
-    return "edit" + this.parent();
+    return "edit" + $super();
   },
 });
 
 ClEditOrStayConstraint.subclass('ClStayConstraint', 'default category', {
   //Extends: ClEditOrStayConstraint,
   
-  initialize: function(clv /*ClVariable*/, strength /*ClStrength*/, weight /*double*/) {
-    this.parent(clv, strength || ClStrength.weak, weight);
+  initialize: function($super, clv /*ClVariable*/, strength /*ClStrength*/, weight /*double*/) {
+    $super(clv, strength || ClStrength.weak, weight);
   },
 
   isStayConstraint: function() {
@@ -143,7 +143,7 @@ ClEditOrStayConstraint.subclass('ClStayConstraint', 'default category', {
   },
 
   toString: function() {
-    return "stay " + this.parent();
+    return "stay " + $super();
   },
 });
 
