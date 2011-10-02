@@ -1,7 +1,7 @@
 // FILE: EDU.Washington.grad.gjb.cassowary
 // package EDU.Washington.grad.gjb.cassowary;
 
-var ClStrength = new Class({
+Object.subclass('ClStrength', 'default category', {
 
   /* FIELDS:
      private String _name

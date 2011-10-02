@@ -1,6 +1,6 @@
 
-var ClSimplexSolver = new Class({
-  Extends: ClTableau,
+ClTableau.subclass('ClSimplexSolver', 'default category', {
+  //Extends: ClTableau,
   /* FIELDS:
       var _stayMinusErrorVars //Vector
       var _stayPlusErrorVars //Vector

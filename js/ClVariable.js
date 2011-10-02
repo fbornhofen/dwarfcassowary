@@ -1,5 +1,5 @@
 
-var ClAbstractVariable = new Class({
+Object.subclass('ClAbstractVariable', 'default category', {
   initialize: function(a1,a2) {
     this.hash_code = ClAbstractVariable.iVariableNumber++;
     if (typeof(a1) == "string" || (a1 == null)) {
@@ -45,8 +45,8 @@ var ClAbstractVariable = new Class({
 
 ClAbstractVariable.iVariableNumber = 1;
 
-var ClVariable = new Class({
-  Extends: ClAbstractVariable,
+ClAbstractVariable.subclass('ClVariable', 'default category', {
+  //Extends: ClAbstractVariable,
   initialize: function(name_or_val, value) {
     this._name = "";
     this._value = 0.0;
@@ -116,8 +116,8 @@ ClVariable.getVarMap = function(map) {
 }
 
 
-var ClDummyVariable = new Class({
-  Extends: ClAbstractVariable,
+ClAbstractVariable.subclass('ClDummyVariable', 'default category', {
+  //Extends: ClAbstractVariable,
   initialize: function(name_or_val, prefix) {
     this.parent(name_or_val, prefix);
   },
@@ -143,8 +143,8 @@ var ClDummyVariable = new Class({
   },
 });
 
-var ClObjectiveVariable = new Class({
-  Extends: ClAbstractVariable,
+ClAbstractVariable.subclass('ClObjectiveVariable', 'default category', {
+  //Extends: ClAbstractVariable,
   initialize: function(name_or_val, prefix) {
     this.parent(name_or_val, prefix);
   },
@@ -167,8 +167,8 @@ var ClObjectiveVariable = new Class({
 });
 
 
-var ClSlackVariable = new Class({
-  Extends: ClAbstractVariable,
+ClAbstractVariable.subclass('ClSlackVariable', 'default category', {
+  //Extends: ClAbstractVariable,
   initialize: function(name_or_val, prefix) {
     this.parent(name_or_val, prefix);
   },

@@ -1,5 +1,5 @@
 
-var ClEditInfo = new Class({
+Object.subclass('ClEditInfo', 'default category', {
   /* FIELDS:
       var cn //ClConstraint
       var clvEditPlus //ClSlackVariable

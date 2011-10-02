@@ -1,5 +1,5 @@
 
-var ClTests = new Class({
+Object.subclass('ClTests', 'default category', {
   initialize: function() {
   },
 

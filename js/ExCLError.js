@@ -1,7 +1,7 @@
 // FILE: EDU.Washington.grad.gjb.cassowary
 // package EDU.Washington.grad.gjb.cassowary;
 
-var ExCLError = new Class({
+Object.subclass('ExCLError', 'default category', {
   description: function() {
     return "(ExCLError) An error has occured in CL";
   },
@@ -18,8 +18,8 @@ var ExCLConstraintNotFound = new Class({
 });
 
 
-var ExCLInternalError = new Class({
-  Extends: ExCLError,
+ExCLError.subclass('ExCLInternalError', 'default category', {
+  //Extends: ExCLError,
   /* FIELDS:
      private String description_
  */
@@ -31,29 +31,29 @@ var ExCLInternalError = new Class({
   },
 });
 
-var ExCLNonlinearExpression = new Class({
-  Extends: ExCLError,
+ExCLError.subclass('ExCLNonlinearExpression', 'default category', {
+  //Extends: ExCLError,
   description: function() {
     return "(ExCLNonlinearExpression) The resulting expression would be nonlinear";
   },
 });
 
-var ExCLNotEnoughStays = new Class({
-  Extends: ExCLError,
+ExCLError.subclass('ExCLNotEnoughStays', 'default category', {
+  //Extends: ExCLError,
   description: function() {
     return "(ExCLNotEnoughStays) There are not enough stays to give specific values to every variable";
   },
 });
 
-var ExCLRequiredFailure = new Class({
-  Extends: ExCLError,
+ExCLError.subclass('ExCLRequiredFailure', 'default category', {
+  //Extends: ExCLError,
   description: function() {
     return "(ExCLRequiredFailure) A required constraint cannot be satisfied";
   },
 });
 
-var ExCLTooDifficult = new Class({
-  Extends: ExCLError,
+ExCLError.subclass('ExCLTooDifficult', 'default category', {
+  //Extends: ExCLError,
   description: function() {
     return "(ExCLTooDifficult) The constraints are too difficult to solve";
   },

@@ -1,5 +1,5 @@
 
-var ClSymbolicWeight = new Class({
+Object.subclass('ClSymbolicWeight', 'default category', {
   initialize: function(w1, w2, w3) {
     this._values = new Array(w1, w2, w3);
   },

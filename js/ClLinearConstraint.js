@@ -1,7 +1,7 @@
 
 // ABSTRACT
-var ClLinearConstraint = new Class({
-  Extends: ClConstraint,
+ClConstraint.subclass('ClLinearConstraint', 'default category', {
+  //Extends: ClConstraint,
   /* FIELDS:
      var _expression
    */
@@ -20,8 +20,8 @@ var ClLinearConstraint = new Class({
 });
 
 
-var ClLinearInequality = new Class({
-  Extends: ClLinearConstraint,
+ClLinearConstraint.subclass('ClLinearInequality', 'default category', {
+  // Extends: ClLinearConstraint,
 
   initialize: function(a1, a2, a3, a4, a5) {
     if (a1 instanceof ClLinearExpression &&
@@ -60,8 +60,8 @@ var ClLinearInequality = new Class({
 });
 
 
-var ClLinearEquation = new Class({
-  Extends: ClLinearConstraint,
+ClLinearConstraint.subclass('ClLinearEquation', 'default category', {
+  //Extends: ClLinearConstraint,
 
   initialize: function(a1, a2, a3, a4) {
     if (a1 instanceof ClLinearExpression && !a2 || a2 instanceof ClStrength) {

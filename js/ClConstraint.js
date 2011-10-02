@@ -5,7 +5,7 @@
 // Linear constraints are in ClLinearConstraint.js
 
 
-var ClConstraint = new Class({
+Object.subclass('ClConstraint', 'default category', {
   /* FIELDS:
     var _strength
     var _weight
@@ -88,8 +88,8 @@ var ClConstraint = new Class({
 });
 
 
-var ClEditOrStayConstraint = new Class({
-  Extends: ClConstraint,
+ClConstraint.subclass('ClEditOrStayConstraint', 'default category', {
+  //Extends: ClConstraint,
   /* FIELDS:
      var _variable
      var _expression
@@ -115,8 +115,8 @@ var ClEditOrStayConstraint = new Class({
 });
 
 
-var ClEditConstraint = new Class({
-  Extends: ClEditOrStayConstraint,
+ClEditOrStayConstraint.subclass('ClEditConstraint', 'default category', {
+  //Extends: ClEditOrStayConstraint,
 
   initialize: function(clv /*ClVariable*/, strength /*ClStrength*/, weight /*double*/) {
     this.parent(clv, strength, weight);
@@ -131,8 +131,8 @@ var ClEditConstraint = new Class({
   },
 });
 
-var ClStayConstraint = new Class({
-  Extends: ClEditOrStayConstraint,
+ClEditOrStayConstraint.subclass('ClStayConstraint', 'default category', {
+  //Extends: ClEditOrStayConstraint,
   
   initialize: function(clv /*ClVariable*/, strength /*ClStrength*/, weight /*double*/) {
     this.parent(clv, strength || ClStrength.weak, weight);
