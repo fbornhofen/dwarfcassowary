@@ -145,7 +145,7 @@ ClAbstractVariable.subclass('ClDummyVariable', 'default category', {
 
 ClAbstractVariable.subclass('ClObjectiveVariable', 'default category', {
   //Extends: ClAbstractVariable,
-  initialize: function(name_or_val, prefix) {
+  initialize: function($super, name_or_val, prefix) {
     $super(name_or_val, prefix);
   },
 
@@ -169,7 +169,7 @@ ClAbstractVariable.subclass('ClObjectiveVariable', 'default category', {
 
 ClAbstractVariable.subclass('ClSlackVariable', 'default category', {
   //Extends: ClAbstractVariable,
-  initialize: function(name_or_val, prefix) {
+  initialize: function($super, name_or_val, prefix) {
     $super(name_or_val, prefix);
   },
 

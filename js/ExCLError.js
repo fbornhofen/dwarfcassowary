@@ -10,8 +10,8 @@ Object.subclass('ExCLError', 'default category', {
   }
 });
 
-var ExCLConstraintNotFound = new Class({
-  Extends: ExCLError,
+ExCLError.subclass('ExCLConstraintNotFound', 'default category', {
+  //Extends: ExCLError,
   description: function() {
     return "(ExCLConstraintNotFound) Tried to remove a constraint never added to the tableu";
   },
