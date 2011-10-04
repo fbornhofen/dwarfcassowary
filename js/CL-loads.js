@@ -1,34 +1,27 @@
 print = function () {};
 
-(function (urlPrefix) {
+var urlPrefix = '/dwarfcassowary/js/';
 
-  var load = function (jsFile) {
-    var el = document.createElement('script');
-    el.setAttribute('type', 'text/javascript');
-    el.setAttribute('src', urlPrefix + '/' + jsFile);
-    document.body.appendChild(el);
-  }
-
-  // no more mootools. requires Object extensions from lively/Base.js instead
-  //load("mootools-core-1.3.2-server.js");
-  load('jshashtable-2.1-gjb.js');
-  load('jshashset-gjb.js');
-  load('ExCLError.js')
-  load('ClSymbolicWeight.js')
-  load('ClStrength.js')
-  load('ClVariable.js')
-  load('ClPoint.js')
-  load('ClLinearExpression.js')
-  load('ClConstraint.js')
-  load('ClLinearConstraint.js')
-  load('ClEditInfo.js')
-  load('ClTableau.js')
-  load('ClSimplexSolver.js')
-  load('CL.js')
-
-  load('Timer.js')
-  load('ClTests.js')
+// no more mootools. requires Object extensions from lively/Base.js instead
+//load("mootools-core-1.3.2-server.js");
+['jshashtable-2.1-gjb.js',
+'jshashset-gjb.js',
+'ExCLError.js',
+'ClSymbolicWeight.js',
+'ClStrength.js',
+'ClVariable.js',
+'ClPoint.js',
+'ClLinearExpression.js',
+'ClConstraint.js',
+'ClLinearConstraint.js',
+'ClEditInfo.js',
+'ClTableau.js',
+'ClSimplexSolver.js',
+'CL.js',
+'Timer.js',
+'ClTests.js'].forEach (function (file) {
+  JSLoader.loadJs(urlPrefix + file);
+})
 
 
-}) ('/dwarfcassowary/js');
 
