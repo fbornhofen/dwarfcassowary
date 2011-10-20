@@ -20,7 +20,7 @@ var urlPrefix = '/dwarfcassowary/js/';
 'CL.js',
 'Timer.js',
 'ClTests.js'].forEach (function (file) {
-  JSLoader.loadJs(urlPrefix + file);
+  JSLoader.loadJs(urlPrefix + file, function(){}, true);
 })
 
 
