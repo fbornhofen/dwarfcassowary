@@ -211,15 +211,6 @@ var Hashtable = (function() {
 		return ( bucket && (bucket instanceof Bucket) ) ? bucket : null;
 	}
 
-	function createBucketAggregator (bucketFuncName) {
-		return function() {
-			var aggregated = [], i = buckets.length;
-			while (i--) {
-				buckets[i][bucketFuncName](aggregated);
-			}
-			return aggregated;
-		};
-	};
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
@@ -227,11 +218,23 @@ var Hashtable = (function() {
 		initialize: function(hashingFunctionParam, equalityFunctionParam) {
 			this.hashingFunctionParam = hashingFunctionParam;
 			this.equalityFunctionParam = equalityFunctionParam;
+			this.hasCustomEqualityFunction = (typeof equalityFunctionParam == FUNCTION);
 			this.buckets = [];
 			this.bucketsByHash = {};
 
-			this.hashingFunction = (typeof hashingFunctionParam == FUNCTION) ? hashingFunctionParam : hashObject;
-			this.equalityFunction = (typeof equalityFunctionParam == FUNCTION) ? equalityFunctionParam : null;
+		},
+
+		hashingFunction: function(key) {
+			return ((typeof this.hashingFunctionParam == FUNCTION) ? 
+					this.hashingFunctionParam : hashObject) (key);
+		},
+
+		equalityFunction: function (arg1, arg2) {
+			
+			return ((this.hasCustomEqualityFunction) ? 
+					equalityFunctionParam : 
+					(function (a, b) { return a == b; })
+				) (arg1, arg2);
 		},
 
 		put: function(key, value) {
@@ -254,7 +257,7 @@ var Hashtable = (function() {
 				}
 			} else {
 					// No bucket exists for the key, so create one and put our key/value mapping in
-				bucket = new Bucket(hash, key, value, this.equalityFunction);
+				bucket = new Bucket(hash, key, value, this.hasCustomEqualityFunction ? this.equalityFunction : null);
 				this.buckets[this.buckets.length] = bucket;
 				this.bucketsByHash[hash] = bucket;
 			}
@@ -310,9 +313,24 @@ var Hashtable = (function() {
 		},
 
 
-		keys: createBucketAggregator("keys"),
-		values: createBucketAggregator("values"),
-		entries: createBucketAggregator("getEntries"),
+		createBucketAggregator: function(bucketFuncName) {
+			return function() {
+				var aggregated = [], i = this.buckets.length;
+				while (i--) {
+					this.buckets[i][bucketFuncName](aggregated);
+				}
+				return aggregated;
+			};
+		},
+		keys: function() {
+			return this.createBucketAggregator("keys");
+		},
+		values: function() {
+			return this.createBucketAggregator("values");
+		},
+		entries: function() {
+			return this.createBucketAggregator("getEntries");
+		},
 
 		remove: function(key) {
 			checkKey(key);
@@ -330,8 +348,8 @@ var Hashtable = (function() {
 					if (!bucket.entries.length) {
 						// Bucket is empty, so remove it from the bucket collections
 						bucketIndex = searchBuckets(this.buckets, hash);
-						arrayRemoveAt(buckets, bucketIndex);
-						delete bucketsByHash[hash];
+						arrayRemoveAt(this.buckets, bucketIndex);
+						delete this.bucketsByHash[hash];
 					}
 				}
 			}
