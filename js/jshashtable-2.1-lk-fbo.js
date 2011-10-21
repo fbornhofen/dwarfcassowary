@@ -402,7 +402,6 @@ var Hashtable = (function() {
 			var entries = hashtable.entries();
 			var entry, key, value, thisValue, i = entries.length;
 			var hasConflictCallback = (typeof conflictCallback == FUNCTION);
-			alert('putAll i = ' + i);
 			while (i--) {
 				entry = entries[i];
 				key = entry[0];
