@@ -96,35 +96,6 @@ var Hashtable = (function() {
 		ENTRY = 1, 
 		ENTRY_INDEX_AND_VALUE = 2;
 
-	var createBucketSearcher = function(mode) {
-		return function(key) {
-			var i = this.entries.length, entry, equals = this.getEqualityFunction(key);
-			while (i--) {
-				entry = this.entries[i];
-				if ( equals(key, entry[0]) ) {	
-					switch (mode) {
-					case EXISTENCE:
-						return true;
-					case ENTRY:
-						return entry;
-					case ENTRY_INDEX_AND_VALUE:
-						return [ i, entry[1] ];
-					}
-				}
-			}
-			return false;
-		};
-	};
-
-	var createBucketLister = function(entryProperty) {
-		return function(aggregatedArr) {
-			var startIndex = aggregatedArr.length;
-			for (var i = 0, len = this.entries.length; i < len; ++i) {
-				aggregatedArr[startIndex + i] = this.entries[i][entryProperty];
-			}
-		};
-	};
-
 
 	/// ---------------- Bucket
 
@@ -141,15 +112,48 @@ var Hashtable = (function() {
 			}
 		},
 
-
+		createBucketSearcher: function(mode) {
+			var that = this;
+			return function(key) {
+				var i = that.entries.length, entry, equals = that.getEqualityFunction(key);
+				while (i--) {
+					entry = that.entries[i];
+					if ( equals(key, entry[0]) ) {	
+						switch (mode) {
+						case EXISTENCE:
+							return true;
+						case ENTRY:
+							return entry;
+						case ENTRY_INDEX_AND_VALUE:
+							return [ i, entry[1] ];
+						}
+					}
+				}
+				return false;
+			};
+		},
+		
+		createBucketLister: function(entryProperty) {
+			var that = this;
+			return function(aggregatedArr) {
+				var startIndex = aggregatedArr.length;
+				for (var i = 0, len = that.entries.length; i < len; ++i) {
+					aggregatedArr[startIndex + i] = that.entries[i][entryProperty];
+				}
+			};
+		},
 
 		getEqualityFunction: function(searchValue) {
 			return (typeof searchValue.equals == FUNCTION) ? equals_fixedValueHasEquals : equals_fixedValueNoEquals;
 		},
 
-		getEntryForKey: createBucketSearcher(ENTRY),
-
-		getEntryAndIndexForKey: createBucketSearcher(ENTRY_INDEX_AND_VALUE),
+		getEntryForKey: function(key) {
+			return (this.createBucketSearcher(ENTRY))(key);
+		},
+	
+		getEntryAndIndexForKey: function(key) {
+			return (this.createBucketSearcher(ENTRY_INDEX_AND_VALUE))(key);
+		},
 
 		removeEntryForKey: function(key) {
 			var result = this.getEntryAndIndexForKey(key);
@@ -163,10 +167,14 @@ var Hashtable = (function() {
 		addEntry: function(key, value) {
 			this.entries[this.entries.length] = [key, value];
 		},
+		
+		keys: function(aggregatedArr) {
+			return (this.createBucketLister(0))(aggregatedArr);
+		},
 
-		keys: createBucketLister(0),
-
-		values: createBucketLister(1),
+		values: function(aggregatedArr) {
+			return (this.createBucketLister(1))(aggregatedArr);
+		},
 
 		getEntries: function(entries) {
 			var startIndex = entries.length;
@@ -176,7 +184,9 @@ var Hashtable = (function() {
 			}
 		},
 
-		containsKey: createBucketSearcher(EXISTENCE),
+		containsKey: function(key) {
+			return (this.createBucketSearcher(EXISTENCE))(key);
+		},
 
 		containsValue: function(value) {
 			var i = this.entries.length;
@@ -314,22 +324,23 @@ var Hashtable = (function() {
 
 
 		createBucketAggregator: function(bucketFuncName) {
+			var that = this;
 			return function() {
-				var aggregated = [], i = this.buckets.length;
+				var aggregated = [], i = that.buckets.length;
 				while (i--) {
-					this.buckets[i][bucketFuncName](aggregated);
+					that.buckets[i][bucketFuncName](aggregated);
 				}
 				return aggregated;
 			};
 		},
 		keys: function() {
-			return this.createBucketAggregator("keys");
+			return (this.createBucketAggregator("keys"))();
 		},
 		values: function() {
-			return this.createBucketAggregator("values");
+			return (this.createBucketAggregator("values"))();
 		},
 		entries: function() {
-			return this.createBucketAggregator("getEntries");
+			return (this.createBucketAggregator("getEntries"))();
 		},
 
 		remove: function(key) {
@@ -391,6 +402,7 @@ var Hashtable = (function() {
 			var entries = hashtable.entries();
 			var entry, key, value, thisValue, i = entries.length;
 			var hasConflictCallback = (typeof conflictCallback == FUNCTION);
+			alert('putAll i = ' + i);
 			while (i--) {
 				entry = entries[i];
 				key = entry[0];
