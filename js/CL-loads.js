@@ -5,7 +5,8 @@ var urlPrefix = Config.codeBase  + 'apps/dwarfcassowary/js/';
 
 // no more mootools. requires Object extensions from lively/Base.js instead
 //load("mootools-core-1.3.2-server.js");
-['jshashtable-2.1-gjb.js',
+[//'jshashtable-2.1-gjb.js',
+'jshashtable-2.1-fbo.js',
 'jshashset-gjb.js',
 'ExCLError.js',
 'ClSymbolicWeight.js',
