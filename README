@@ -3,7 +3,13 @@ DwarfCassowary - Constraint Solving for the Lively Kernel based on Cassowary for
 This is a Lively Kernel adaption of the JavaScript implementation of the Cassowary Constraint Solving Toolkit.
 As some of Lively's libraries conflict with the ones used for Cassowary/JavaScript, changes are likely to be restricted to the class system.
 
-Thanks to the original authors for this great piece of software:
+Require DwarfCassowary in your Lively module to import all Cassowary classes into the global namespace. Example code from the html files is supposed to run without modifications. 
+
+The package also contains two required Lively modules (Hashtable and HashSet) that are Lively ports of jshashtable by Tim Down (http://www.timdown.co.uk/jshashtable/).
+
+
+THANKS
+to the original authors for this great piece of software:
 
 Cassowary Constraint Solving Toolkit for C++, Java, and Smalltalk
 Version 0.70

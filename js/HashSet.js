@@ -31,6 +31,8 @@
  * https://github.com/fbornhofen
  */
 
+module('apps.dwarfcassowary.js.HashSet').requires('apps.dwarfcassowary.js.Hashtable').toRun(function() {
+
 Object.subclass('HashSet', 'default category', {
     initialize: function(hashingFunction, equalityFunction) {
         this.hashingFunction = hashingFunction;
@@ -120,4 +122,6 @@ Object.subclass('HashSet', 'default category', {
             f(this.hashTable.keys()[i]);
         }
     },
+});
+
 });

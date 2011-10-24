@@ -15,6 +15,7 @@
  */
 
 /**
+ * ORIGINAL:
  * jshashtable
  *
  * jshashtable is a JavaScript implementation of a hash table. It creates a single constructor function called Hashtable
@@ -24,9 +25,15 @@
  * Version: 2.1
  * Build date: 21 March 2010
  * Website: http://www.timdown.co.uk/jshashtable
+ *
+ * I made it a Lively module.
+ * Hashtable is still global.
+ * Fabian Bornhofen <fbornhofen@googlemail.com>
+ * 2011-10-24
  */
 
-var Hashtable = (function() {
+
+module('apps.dwarfcassowary.js.Hashtable').requires().toRun(function() {
 	var FUNCTION = "function";
 
 	var arrayRemoveAt = (typeof Array.prototype.splice == FUNCTION) ?
@@ -424,4 +431,4 @@ var Hashtable = (function() {
 	});
 
 	return Hashtable;
-})();
+});
