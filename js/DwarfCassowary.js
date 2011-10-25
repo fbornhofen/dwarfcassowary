@@ -1921,7 +1921,9 @@ ClTableau.subclass('ClSimplexSolver', 'default category', {
 
 
 // bunch of global functions
-var CL = {
+/*var*/
+// ATTENTION THIS IS REALLY GLOBAL!
+CL = {
   debugprint: function(s /*String*/) {
     if (CL.fVerboseTraceOn) {
       print(s);
