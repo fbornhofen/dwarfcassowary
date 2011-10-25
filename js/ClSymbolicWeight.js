@@ -26,7 +26,7 @@ Object.subclass('ClSymbolicWeight', 'default category', {
   },
 
   lessThan: function(c) {
-    for (i = 0; i < this._values.length; ++i) {
+    for (var i = 0; i < this._values.length; ++i) {
       if (this._values[i] < c._values[i]) {
         return true;
       } else if (this._values[i] > c._values[i]) {
@@ -37,7 +37,7 @@ Object.subclass('ClSymbolicWeight', 'default category', {
   },
     
   lessThanOrEqual: function(c) {
-    for (i = 0; i < this._values.length; ++i) {
+    for (var i = 0; i < this._values.length; ++i) {
       if (this._values[i] < c._values[i]) {
         return true;
       } else if (this._values[i] > c._values[i]) {
@@ -48,7 +48,7 @@ Object.subclass('ClSymbolicWeight', 'default category', {
   },
 
   equal: function(c) {
-    for (i = 0; i < this._values.length; ++i) {
+    for (var i = 0; i < this._values.length; ++i) {
       if (this._values[i] != c._values[i]) {
         return false;
       }
@@ -72,7 +72,7 @@ Object.subclass('ClSymbolicWeight', 'default category', {
     sum  =  0;
     factor = 1;
     multiplier = 1000;
-    for (i = this._values.length - 1; i >= 0; --i) {
+    for (var i = this._values.length - 1; i >= 0; --i) {
       sum += this._values[i] * factor;
       factor *= multiplier;
     }
