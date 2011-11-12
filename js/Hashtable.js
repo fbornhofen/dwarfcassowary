@@ -430,5 +430,4 @@ module('apps.dwarfcassowary.js.Hashtable').requires().toRun(function() {
 		},
 	});
 
-	return Hashtable;
 });
